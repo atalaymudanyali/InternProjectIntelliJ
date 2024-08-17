@@ -1,0 +1,125 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Create Question</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            background-color: lightgray;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            width: 100%;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <h:form>
+        <div class="container">
+            <h2>Create New Question</h2>
+
+            <!-- Faculty Selection -->
+            <div class="form-group">
+                <label for="faculty">Select Faculty:</label>
+                <p:selectOneMenu id="faculty" value="#{questionController.question.faculty}">
+                    <f:selectItems value="#{questionController.faculties}" var="faculty" itemLabel="#{faculty}" itemValue="#{faculty}" />
+                </p:selectOneMenu>
+            </div>
+
+            <!-- Number of Options -->
+            <div class="form-group">
+                <label for="numOptions">Number of Options:</label>
+                <p:selectOneMenu id="numOptions" value="#{questionController.numOptions}">
+                    <f:selectItem itemLabel="3" itemValue="3" />
+                    <f:selectItem itemLabel="4" itemValue="4" />
+                    <f:selectItem itemLabel="5" itemValue="5" />
+                </p:selectOneMenu>
+            </div>
+
+            <!-- Question Content -->
+            <div class="form-group">
+                <label for="content">Question Content:</label>
+                <p:inputTextarea id="content" value="#{questionController.question.content}" rows="5" />
+            </div>
+
+            <!-- Option 1 -->
+            <div class="form-group">
+                <label for="option1">Option 1:</label>
+                <p:inputText id="option1" value="#{questionController.question.option1}" />
+            </div>
+
+            <!-- Option 2 -->
+            <div class="form-group">
+                <label for="option2">Option 2:</label>
+                <p:inputText id="option2" value="#{questionController.question.option2}" />
+            </div>
+
+            <!-- Option 3 -->
+            <div class="form-group">
+                <label for="option3">Option 3:</label>
+                <p:inputText id="option3" value="#{questionController.question.option3}" />
+            </div>
+
+            <!-- Option 4 -->
+            <h:panelGroup rendered="#{questionController.numOptions >= 4}">
+                <div class="form-group">
+                    <label for="option4">Option 4:</label>
+                    <p:inputText id="option4" value="#{questionController.question.option4}" />
+                </div>
+            </h:panelGroup>
+
+            <!-- Option 5 -->
+            <h:panelGroup rendered="#{questionController.numOptions == 5}">
+                <div class="form-group">
+                    <label for="option5">Option 5:</label>
+                    <p:inputText id="option5" value="#{questionController.question.option5}" />
+                </div>
+            </h:panelGroup>
+
+            <!-- Correct Answer -->
+            <div class="form-group">
+                <label for="answer">Correct Answer:</label>
+                <p:selectOneMenu id="answer" value="#{questionController.question.answer}">
+                    <f:selectItem itemLabel="A" itemValue="option1" />
+                    <f:selectItem itemLabel="B" itemValue="option2" />
+                    <f:selectItem itemLabel="C" itemValue="option3" />
+                    <f:selectItem itemLabel="D" itemValue="option4" rendered="#{questionController.numOptions >= 4}" />
+                    <f:selectItem itemLabel="E" itemValue="option5" rendered="#{questionController.numOptions == 5}" />
+                </p:selectOneMenu>
+            </div>
+
+            <!-- Question Weight -->
+            <div class="form-group">
+                <label for="weight">Question Weight:</label>
+                <p:inputText id="weight" value="#{questionController.question.questionWeight}" />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <p:commandButton value="Create Question" action="#{questionController.createQuestion}" update="@form" />
+            </div>
+
+        </div>
+    </h:form>
+</h:body>
+</html>

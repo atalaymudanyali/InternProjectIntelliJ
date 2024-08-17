@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Create Quiz</title>
+    <style>
+        .container {
+            width: 100%;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .panel {
+            width: 50%;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            background-color: lightgray;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            width: 100%;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <h:form>
+        <div class="container">
+            <div class="panel">
+                <h2>Create Quiz</h2>
+                <div class="form-group">
+                    <label for="numQuestions">Number of Questions:</label>
+                    <p:inputNumber id="numQuestions" value="#{quizController.numQuestions}" minValue="5" maxValue="20" />
+                </div>
+
+                <div class="form-group">
+                    <label for="examDuration">Exam Duration (minutes):</label>
+                    <p:inputNumber id="examDuration" value="#{quizController.examDuration}" minValue="5" maxValue="180" />
+                </div>
+
+                <div class="form-group">
+                    <p:commandButton value="Create Quiz" action="#{quizController.createQuiz}" update="@form" />
+                </div>
+
+                <h:messages globalOnly="true" style="color: red;" />
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>

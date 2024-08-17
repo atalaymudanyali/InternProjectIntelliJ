@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Register</title>
+    <style>
+        .container {
+            width: 100%;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+        }
+        .panel {
+            width: 45%;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            background-color: lightgray;
+        }
+        .panel h2 {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            width: 100%;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <h:form>
+        <div class="container">
+            <div class="panel">
+                <h2>Register</h2>
+                <div class="form-group">
+                    <label for="regFname">First Name:</label>
+                    <p:inputText id="regFname" value="#{userController.fname}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="regLname">Last Name:</label>
+                    <p:inputText id="regLname" value="#{userController.lname}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">Email:</label>
+                    <p:inputText id="regEmail" value="#{userController.email}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="faculty">Faculty:</label>
+                    <h:selectOneMenu id="faculty" value="#{userController.selectedFaculty}">
+                        <f:selectItems value="#{userController.faculties}" var="faculty"
+                                       itemLabel="#{faculty}" itemValue="#{faculty}" />
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword">Password:</label>
+                    <p:password id="regPassword" value="#{userController.password}" />
+                </div>
+                <div class="form-group">
+                    <label for="regRole">Role:</label>
+                    <h:selectOneMenu id="regRole" value="#{userController.selectedRole}">
+                        <f:selectItem itemValue="STUDENT" itemLabel="Student" />
+                        <f:selectItem itemValue="TEACHER" itemLabel="Teacher" />
+                    </h:selectOneMenu>
+                </div>
+                <div class="form-group">
+                    <p:commandButton value="Register" action="#{userController.register}" update="@form" />
+                </div>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>
