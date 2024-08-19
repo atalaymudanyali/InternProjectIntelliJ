@@ -31,7 +31,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login.xhtml","/api/register", "/api/login","/register.xhtml","/home/dashboard.xhtml", "forgetPassword.xhtml","/auth/generate-otp", "/auth/validate-otp" , "/error").permitAll()
+                        .requestMatchers("/login.xhtml","/api/register", "/api/login","/api/auth/login","api/auth/generate-otp","/register.xhtml","/home/dashboard.xhtml", "forgetPassword.xhtml","/auth/generate-otp", "/auth/validate-otp" , "/error").permitAll()
                         .requestMatchers("/resources/**", "/static/**", "/webjars/**").permitAll()  // Allow access to static resources
                         // .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/home/createQuestion.xhtml", "/home/createQuiz.xhtml").hasAnyRole("TEACHER", "ADMIN")
