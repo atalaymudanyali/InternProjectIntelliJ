@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.internproject.quizApp.model.exam.Category;
+import com.internproject.quizApp.model.exam.Faculty;
 import com.internproject.quizApp.model.exam.Quiz;
 
 
@@ -14,5 +15,9 @@ public interface QuizService {
     public Quiz getQuiz(Long quizId);
     public void deleteQuiz(Long quizId);
     public List<Quiz> getQuizzesOfCategory(Category cat);
+    void assignQuizToFaculty(Long quizId, Faculty faculty);
+    List<Quiz> getAllQuizzes();
+    List<Quiz> getQuizzesByFaculty(Faculty faculty);
+
 
 }

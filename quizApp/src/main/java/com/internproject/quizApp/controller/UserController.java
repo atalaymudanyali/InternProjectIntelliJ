@@ -59,7 +59,6 @@ public class UserController implements Serializable {
                 adminUser.setFName("Admin");
                 adminUser.setLname("Admin");
                 adminUser.setEmail("admin@example.com");
-                adminUser.setProfile("default.png");
 
                 Role adminRole = new Role();
                 adminRole.setRoleName("ADMIN");
@@ -109,7 +108,6 @@ public class UserController implements Serializable {
         user.setLname(lname);
         user.setEmail(email);
         user.setFaculty(selectedFaculty);
-        user.setProfile("default.png");
 
         Role role = new Role();
         role.setRoleName(selectedRole);

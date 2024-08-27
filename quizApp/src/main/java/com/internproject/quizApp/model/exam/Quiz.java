@@ -3,9 +3,7 @@ package com.internproject.quizApp.model.exam;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,6 +33,11 @@ public class Quiz {
     @Column(nullable = false)
     private int durationMinutes;
 
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING)
+    private Faculty faculty;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
@@ -63,7 +66,7 @@ public class Quiz {
     }
 
 
-public Quiz(String title, String description, boolean active, String maxMarks, String noOfQuestions, Category category) {
+    public Quiz(String title, String description, boolean active, String maxMarks, String noOfQuestions, Category category) {
     this.title = title;
     this.description = description;
     this.active = active;

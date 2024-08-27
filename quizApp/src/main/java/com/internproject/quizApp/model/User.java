@@ -1,6 +1,8 @@
+
 package com.internproject.quizApp.model;
 
 import com.internproject.quizApp.model.exam.Faculty;
+import com.internproject.quizApp.model.exam.Quiz;
 import com.internproject.quizApp.model.exam.Result;
 
 import jakarta.persistence.*;
@@ -48,6 +50,15 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Result> results = new ArrayList<>();
 
+    @Getter
+    @ManyToMany
+    @JoinTable(
+            name = "user_quiz",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "quiz_id")
+    )
+    private Set<Quiz> quizzes = new HashSet<>();
+
     @Transient
     private String selectedRole;
 
@@ -61,21 +72,6 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return userName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
     }
 
     @Override
