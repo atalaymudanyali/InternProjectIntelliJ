@@ -9,8 +9,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +23,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,9 +40,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Faculty faculty;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-    @JsonIgnore
-    private Set<UserRole> userRoles = new HashSet<>();
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnore
@@ -59,25 +56,7 @@ public class User implements UserDetails {
     )
     private Set<Quiz> quizzes = new HashSet<>();
 
-    @Transient
-    private String selectedRole;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Authority> authorities = new HashSet<>();
-        this.userRoles.forEach(userRole -> authorities.add(new Authority(userRole.getRole().getRoleName())));
-        return authorities;
-    }
-
-    @Override
-    public String getUsername() {
-        return userName;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
 
     public User(Long id, String userName, String password, String fName, String lname, String email, String phone,
                 boolean enabled, Faculty faculty) {
