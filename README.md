@@ -191,6 +191,3 @@ src/main/resources/
   META-INF/ (faces-config.xml, .xhtml pages)
   application.properties
 ```
-
-## License
-This project is currently unlicensed. Add a license file if needed.
